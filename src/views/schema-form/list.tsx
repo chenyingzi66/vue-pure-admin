@@ -1,4 +1,6 @@
 import Base from "./form/base.vue";
+import CompactDialog from "./form/compact-dialog.vue";
+import CompactList from "./form/compact-list.vue";
 import Dialog from "./form/dialog.vue";
 import Drawer from "./form/drawer.vue";
 import Steps from "./form/steps.vue";
@@ -13,6 +15,18 @@ export const list = [
     content: rendContent("base"),
     title: "基础表单",
     component: Base
+  },
+  {
+    key: "compact-dialog",
+    content: rendContent("compact-dialog"),
+    title: "紧凑弹框",
+    component: CompactDialog
+  },
+  {
+    key: "compact-list",
+    content: rendContent("compact-list"),
+    title: "紧凑列表",
+    component: CompactList
   },
   {
     key: "dialog",
