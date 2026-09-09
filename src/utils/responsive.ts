@@ -6,6 +6,7 @@ import { responsiveStorageNameSpace } from "@/config";
 
 export const injectResponsiveStorage = (app: App, config: PlatformConfigs) => {
   const nameSpace = responsiveStorageNameSpace();
+  const storedConfigure = Storage.getData("configure", nameSpace);
   const configObj = Object.assign(
     {
       // 国际化 默认中文zh
@@ -23,7 +24,7 @@ export const injectResponsiveStorage = (app: App, config: PlatformConfigs) => {
         themeMode: config.ThemeMode ?? "light" // 主题模式（浅色：light、深色：dark、自动：system）
       },
       // 系统配置-界面显示
-      configure: Storage.getData("configure", nameSpace) ?? {
+      configure: {
         grey: config.Grey ?? false,
         weak: config.Weak ?? false,
         hideTabs: config.HideTabs ?? false,
@@ -33,6 +34,8 @@ export const injectResponsiveStorage = (app: App, config: PlatformConfigs) => {
         watermarkText: config.WatermarkText ?? "",
         tagsStyle: config.TagsStyle ?? "chrome",
         multiTagsCache: config.MultiTagsCache ?? false,
+        ...storedConfigure,
+        // 内容宽度由项目配置统一控制，避免旧缓存让页面重启后重新居中留白
         stretch: config.Stretch ?? false
       }
     },
